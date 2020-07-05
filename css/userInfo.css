@@ -1,0 +1,44 @@
+.testTableDiv{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.testImgSize{
+	border-radius: 40px;
+	width: 50px;
+	height: 50px;
+}
+
+h2{
+	display: flex;
+	justify-content: center;
+	margin: 10px 20px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.testTable{
+	display:block;
+	padding : 5px 20px;
+	vertical-align:
+}
+
+.testTable td {
+	text-align: center;
+	border : solid 1px;
+	width : 100px;
+}
+
+.mainText{
+	padding: 10px 0px;
+	background-color:gray; 
+}
+.font{
+	color:white;
+	font-weight: bold;
+}
+
+hr{
+	width:300px;
+}

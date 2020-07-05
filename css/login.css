@@ -1,0 +1,63 @@
+.loginHtml{
+	height: 100%;
+}
+
+.loginBody{
+	height: 100%;
+	background-color: #A9D0F5;
+}
+
+.login{
+	margin-top : 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.loginLeft{
+	background-image: url("/toyPhp/resource/image/loginBack.jpg");
+	background-size: 100% 100%;
+	width: 300px;
+	height: 500px;
+}
+
+.loginRight{
+	background-color: white;
+	width: 300px;
+	height: 500px;
+}
+.loginRight .loginForm{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	margin-top: 50%;
+	margin-bottom: 10px;
+}
+.loginRight .loginForm .user{
+	padding: 10px 20px;
+	margin: 10px 50px;
+}
+.loginRight .loginForm > form > button{
+	margin: 7px 51px;
+}
+.loginRight .loginForm .LoginForm__Login{
+	margin: 10px 49px;
+    border: 1px;
+    font-weight: bolder;
+    background-color: #A9D0F5;
+    width: 214px;
+    font-size: larger;
+    height: 50px;
+   	cursor: pointer;
+}
+.loginRight .loginForm__selectId{
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+.loginRight .loginForm__selectId > a{
+	padding : 0px 5px;
+	font-size: 15px;
+}
+
+
+
