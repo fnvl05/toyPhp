@@ -1,8 +1,10 @@
 <?php
-    $connet = mysqli_connect("localhost","root",'','test_toy');
+    $connect = mysqli_connect("localhost","root",'','test_toy');
     
     $usersId = $_POST['userId'];
-    $usersPw1 = password_hash($_POST['userPw1'], PASSWORD_DEFAULT);
+    $usersPw = $_POST['userPw1'];
+    $option = ['cost' => 5];
+    $usersPwHash = password_hash($usersPw, PASSWORD_DEFAULT, $option);
     $usersName = $_POST['userName'];
     $usersGender = $_POST['gender'];
     $usersEmail = $_POST['email1'].'@'.$_POST['email2'];
@@ -30,12 +32,12 @@
     $resultProfile = resultProfile($usersProfile);
     $resultContent = resultContent($usersContent);
 
-    $insert_sql = "insert into test_users(users_id, users_pw, users_name, users_gender, users_email,
-    users_hobby, users_profile, users_content) values ('$usersId','$usersPw','$usersName','
-    $usersGender','$usersEmail','$usersHobby','$resultProfile','$resultContent')";
+    $insert_sql = "insert into test_users
+    (users_id, users_pw, users_name, users_gender, users_email,users_hobby, users_profile, users_content) 
+    values ('$usersId','$usersPwHash','$usersName','$usersGender','$usersEmail','$usersHobby','$resultProfile','$resultContent')";
 
-    mysqli_query($connet, $insert_sql);
-    mysqli_close($connet);
+    mysqli_query($connect, $insert_sql);
+    mysqli_close($connect);
 
     $file_dir = "C:/xampp/htdocs/toyPhp/resource/image/usersIcon/";
     $filePath = $file_dir.$usersProfile;
