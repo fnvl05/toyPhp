@@ -1,7 +1,7 @@
 document.querySelector("#userId").addEventListener('blur', function(){
     let userId = document.querySelector("#userId").value;
     const url = "/toyPhp/php/joinCheckId.php";
-    ajax(url, userId);
+    console.log(ajax(url, userId));
 })
 
 function ajax(url, userId){
@@ -9,23 +9,24 @@ function ajax(url, userId){
     const data = {
         userId: userId
     };
-    xhttp.onreadystatechange = function(checkData){
-        if(xhttp.readyState === xhttp.DONE){
-            if(xhttp.status === 200 || xhttp.status === 201){
-                const json = JSON.parse(xhttp.responseText);
-                const checkUserId = check(json);
-                fromCheck(checkUserId);
-            }
-        }
-    };
+    
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader('content-type', 'application/json');
     xhttp.send(JSON.stringify(data));
+
+    xhttp.onreadystatechange = function(){
+        if(xhttp.readyState === xhttp.DONE){
+            if(xhttp.status === 200 || xhttp.status === 201){
+                return xhttp.responseText;
+            }else{
+                return console.log("안된다.");
+            }
+        }
+    };
 }
 
 function check(json){
     const checkId = document.querySelector('.checkId');
-    const checkUserId = json.checkId === 'YES' ? true : false;
     if(json.checkId === 'No'){
         checkId.innerText = "아이디를 사용할수 없습니다.";
         checkId.style.color = 'red';
@@ -37,7 +38,6 @@ function check(json){
     }else if(json.checkId === 'YES'&& document.querySelector('#userId').value == ''){
         checkId.innerText = "";
     }
-    return checkUserId;
 }
 
 document.querySelector('#userPw2').addEventListener('blur',function(){
@@ -55,7 +55,7 @@ document.querySelector('#userPw2').addEventListener('blur',function(){
     }
 });
 
-function fromCheck(checkUserId){
+function fromCheck(){
     const userId = document.querySelector('#userId').value;
     const userPw1 = document.querySelector('#userPw1').value;
     const userPw2 = document.querySelector('#userPw2').value;
