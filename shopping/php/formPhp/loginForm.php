@@ -3,11 +3,11 @@
 	<head>
 		<meta http-equiv= "Content-type" content="text/html; charset=utf-8">
 		<title>로그인</title>
-		<link rel="stylesheet" type="text/css" href="/toyPhp/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="/shopping/css/style.css"/>
 	</head>
 	<body class="loginBody">
 		<nav>
-			<?php require_once 'nav.php';?>
+			<?php require_once '../nav.php';?>
 		</nav>
 		<section class="paddingSection">
         	<div class="login">
@@ -30,6 +30,6 @@
 			</div>
         	</div>
 		</section>
-		<script src = "/toyPhp/js/loginJs.js"></script>
+		<script src = "/shopping/js/loginJs.js"></script>
 	</body>
 </html>

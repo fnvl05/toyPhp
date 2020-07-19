@@ -3,16 +3,17 @@
 		<head>
 			<meta http-equiv= "Content-type" content="text/html; charset=utf-8">
 			<title>입력페이지</title>
-			<link rel="stylesheet" type="text/css" href="/toyPhp/css/style.css"/>
+			<link rel="stylesheet" type="text/css" href="/shopping/css/style.css"/>
 		</head>
 		<body>
 			<nav>
-				<?php require 'nav.php';?>
+				<?php require '../nav.php';?>
 			</nav>
 			<section class="paddingSection">
+			<input type="hidden" id="hiddenCheckId" value=""/>
 			<h1>회원가입</h1>
     			<div class="joinForm">	
-            		<form method = "post" action="joinInsert.php" enctype="multipart/form-data" name="joinForm">
+            		<form method = "post" action="/shopping/php/processPhp/joinInsert.php" enctype="multipart/form-data" name="joinForm" onsubmit="return fromCheck()">
             			<input type="text" name="userId" placeholder="아이디를 입력하세요" class="join_text" id="userId"><br/>
 						<p class="help_block">
 							<span class="checkId"></span>
@@ -66,13 +67,13 @@
             			<h3>한마디</h3>
             			<textarea rows="3" cols="54" name = "content"></textarea><br/><hr class="join__hr"/>
             			<div class="join_button">
-        	    			<input type = "button" onclick = "fromCheck()" value = "전달"/>
+        	    			<input type = "submit" value = "전달" class="clickSub"/>
     	        			<input type = "reset" value = "다시"/>
 	            			<input type="button" onclick="backIndex();" value="뒤돌아가기">
             			</div>
             		</form>
     			</div>
 			</section>
-			<script src="/toyPhp/js/joinJs.js"></script>
+			<script src="/shopping/js/joinJs.js"></script>
 		</body>
 	</html>

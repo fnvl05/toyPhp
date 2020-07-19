@@ -5,7 +5,7 @@ function moveLogin(){
 document.querySelector('#loginAjax').addEventListener('click', function(){
     const userId = document.querySelector('#userId').value;
     const userPw = document.querySelector('#userPw').value;
-    const url = "/toyPhp/php/loginCheck.php";
+    const url = "/shopping/php/processPhp/loginCheck.php";
     ajax(userId, userPw, url);
 })
 

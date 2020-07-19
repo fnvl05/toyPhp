@@ -1,10 +1,12 @@
+// 아이디 중복검사
 document.querySelector("#userId").addEventListener('blur', function(){
     let userId = document.querySelector("#userId").value;
-    const url = "/toyPhp/php/joinCheckId.php";
-    console.log(ajax(url, userId));
+    const userIdCheckUrl = "/shopping/php/processPhp/joinCheckId.php";
+    userIdCheckAjax(userIdCheckUrl, userId);
 })
 
-function ajax(url, userId){
+// 아이디 중복검사 ajax
+function userIdCheckAjax(url, userId){
     const xhttp = new XMLHttpRequest();
     const data = {
         userId: userId
@@ -17,29 +19,25 @@ function ajax(url, userId){
     xhttp.onreadystatechange = function(){
         if(xhttp.readyState === xhttp.DONE){
             if(xhttp.status === 200 || xhttp.status === 201){
-                return xhttp.responseText;
-            }else{
-                return console.log("안된다.");
+                const json = JSON.parse(xhttp.responseText);
+                const idCheck = userIdCheck(json);
+                fromIdCheck(idCheck);
+                document.querySelector("#hiddenCheckId").value = idCheck;
             }
         }
     };
 }
 
-function check(json){
-    const checkId = document.querySelector('.checkId');
+// 중복인지 아닌지 
+function userIdCheck(json){
     if(json.checkId === 'No'){
-        checkId.innerText = "아이디를 사용할수 없습니다.";
-        checkId.style.color = 'red';
-        checkId.style.fontWeight = 'bold';
+        return false;
     }else if(json.checkId === 'YES'&& document.querySelector('#userId').value != ''){
-        checkId.innerText = "사용할수 있는 아이디입니다.";
-        checkId.style.color = '#01DF3A';
-        checkId.style.fontWeight = 'bold';
-    }else if(json.checkId === 'YES'&& document.querySelector('#userId').value == ''){
-        checkId.innerText = "";
+        return true;
     }
 }
 
+// 1차 비밀번호와 2차 비밀번호 가 같은지
 document.querySelector('#userPw2').addEventListener('blur',function(){
     let userPw1 = document.querySelector('#userPw1').value;
     let userPw2 = document.querySelector('#userPw2').value;
@@ -55,23 +53,23 @@ document.querySelector('#userPw2').addEventListener('blur',function(){
     }
 });
 
-function fromCheck(){
-    const userId = document.querySelector('#userId').value;
-    const userPw1 = document.querySelector('#userPw1').value;
-    const userPw2 = document.querySelector('#userPw2').value;
-    const userName = document.querySelector('#userName').value;
-    const userGender = document.getElementsByName('gender');
-    const userEmail1 = document.querySelector('#userEmail1').value;
-    const userEmail2 = document.querySelector('#userEmail2').value;
-    const userHobby = document.getElementsByName('hobby[]');
-
-    const formCheck = resultCheck(userId, userPw1, userPw2, userName, userGender, userEmail1, userEmail2, userHobby);
-        
-    if(formCheck && checkUserId){
-        document.joinForm.submit();
-    }          
+//아이디가 중복인지 아닌지를 리턴해서 false일때 true 일때 시각적으로 표현 
+function fromIdCheck(checkId){
+    const checkUserId = document.querySelector('.checkId');
+    if(!checkId){
+        checkUserId.innerText = "아이디를 사용할수 없습니다.";
+        checkUserId.style.color = 'red';
+        checkUserId.style.fontWeight = 'bold';
+    }else if(checkId && document.querySelector('#userId').value != ''){
+        checkUserId.innerText = "사용할수 있는 아이디입니다.";
+        checkUserId.style.color = '#01DF3A';
+        checkUserId.style.fontWeight = 'bold';
+    }else if(checkId && document.querySelector('#userId').value == ''){
+        checkUserId.innerText = "";
+    }
 }
 
+// 라디오 버튼 값이 들어있는지 아닌지
 function checkRadio(userGender){
     const length = userGender.length;
     let check = false;
@@ -84,6 +82,7 @@ function checkRadio(userGender){
     return check;
 }
 
+// 취미가 체크가 되있는지 안되있는지
 function checkHobby(userHobby){
     const length = userHobby.length;
     let check = false;
@@ -96,11 +95,11 @@ function checkHobby(userHobby){
     return check;
 }
 
-//입력을 잘 했는지 판별 함수
+//입력을 잘 했는지 판별
 function resultCheck(userId, userPw1, userPw2, userName, userGender, userEmail1, userEmail2, userHobby){
-    // 시각적으로 보여줄 메세지
-const checkId = document.querySelector('.checkId').value;
-const checkPw = document.querySelector('.checkPw').value;
+// 시각적으로 보여줄 메세지
+const checkId = document.querySelector('.checkId');
+const checkPw = document.querySelector('.checkPw');
 const checkName = document.querySelector('.checkUserName');
 const checkEmail = document.querySelector('.checkUserEmail');
 const checkGender = document.querySelector('.checkUserGender');
@@ -181,4 +180,21 @@ if(userIdCheck && userPwCheck && userNameCheck && userGenderCheck && userEmailCh
     fromCheck = false;
 }
 return fromCheck;
+}
+
+// 마무리
+function fromCheck(){
+    const userId = document.querySelector('#userId').value;
+    const userPw1 = document.querySelector('#userPw1').value;
+    const userPw2 = document.querySelector('#userPw2').value;
+    const userName = document.querySelector('#userName').value;
+    const userGender = document.getElementsByName('gender');
+    const userEmail1 = document.querySelector('#userEmail1').value;
+    const userEmail2 = document.querySelector('#userEmail2').value;
+    const userHobby = document.getElementsByName('hobby[]');
+    
+    const check = resultCheck(userId, userPw1, userPw2, userName, userGender, userEmail1, userEmail2, userHobby);
+    const userIdCheck = document.querySelector("#userCheckId").value;
+    if(check && userIdCheck == true)return true;
+    else return false;
 }

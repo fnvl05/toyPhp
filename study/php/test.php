@@ -2,12 +2,8 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<link rel ="stylesheet" type="text/css" href="../css/style.css">
 	</head>
 	<body>
-		<nav>
-			<?php require 'nav.php';?>
-		</nav>
 		<section class="paddingSection">
 		<br/>
 		<h2>3단</h2>

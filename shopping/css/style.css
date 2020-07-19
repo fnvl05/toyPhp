@@ -1,0 +1,18 @@
+@import "../css/reset.css";
+@import "../css/nav.css";
+@import "../css/joinform.css";
+@import "../css/userInfo.css";
+@import "../css/login.css";
+
+*{
+	box-sizing: border-box;
+}
+
+.paddingSection{
+	padding-top:80px;
+}
+
+a{
+	color : black;
+	text-decoration:none;
+}
